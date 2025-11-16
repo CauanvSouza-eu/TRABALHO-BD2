@@ -1,0 +1,109 @@
+-- RELATÓRIO 1 
+
+CREATE VIEW vw_emprestimos_usuario AS
+SELECT
+    u.id_usuario,
+    u.nome,
+    l.titulo,
+    e.data_retirada,
+    e.data_prevista_devolucao,
+    e.data_real_devolucao,
+    e.status
+FROM emprestimos e
+JOIN usuarios u ON u.id_usuario = e.id_usuario
+JOIN exemplares ex ON ex.id_exemplar = e.id_exemplar
+JOIN livros l ON l.id_livro = ex.id_livro;
+
+SELECT *
+FROM vw_emprestimos_usuario;
+
+-- RELATÓRIO 2
+
+SELECT
+    l.titulo,
+    COUNT(ex.id_exemplar) AS exemplares_disponiveis
+FROM livros l
+JOIN exemplares ex ON ex.id_livro = l.id_livro
+WHERE ex.disponivel = 1
+GROUP BY l.id_livro
+HAVING COUNT(ex.id_exemplar) > 0;
+
+-- RELATÓRIO 3
+
+SELECT
+    r.id_reserva,
+    l.titulo AS livro,
+    u.nome AS usuario,
+    r.data_reserva,
+    r.data_limite_retirada
+FROM reservas r
+JOIN livros l ON l.id_livro = r.id_livro
+JOIN usuarios u ON u.id_usuario = r.id_usuario
+WHERE r.status = 'A'
+ORDER BY l.titulo, r.data_reserva;
+
+-- RELATÓRIO 4
+
+SELECT
+    u.nome AS professor,
+    s.titulo_sugerido,
+    s.autor_sugerido,
+    s.editora_sugerida,
+    s.justificativa,
+    s.status,
+    s.data_sugestao
+FROM sugestoes s
+JOIN usuarios u ON u.id_usuario = s.id_usuario
+WHERE u.tipo_usuario = 'P'
+ORDER BY s.data_sugestao DESC;
+
+-- RELATÓRIO 5
+
+DELIMITER $$
+
+CREATE FUNCTION fn_atraso(data_prevista DATE, data_devolucao DATE)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    RETURN
+        (TO_DAYS(COALESCE(data_devolucao, CURDATE())) - TO_DAYS(data_prevista));
+END $$
+
+DELIMITER ;
+
+SELECT
+    u.nome,
+    l.titulo,
+    e.data_prevista_devolucao,
+    fn_atraso(e.data_prevista_devolucao, e.data_real_devolucao) AS dias_atraso
+FROM emprestimos e
+JOIN usuarios u ON u.id_usuario = e.id_usuario
+JOIN exemplares ex ON ex.id_exemplar = e.id_exemplar
+JOIN livros l ON l.id_livro = ex.id_livro
+WHERE e.status = 'A'
+    AND e.data_prevista_devolucao < CURDATE();
+    
+-- TRIGGER
+
+DELIMITER $$
+
+CREATE TRIGGER trg_devolucao_exemplar
+AFTER UPDATE ON emprestimos
+FOR EACH ROW
+BEGIN
+    IF NEW.data_real_devolucao IS NOT NULL THEN
+        UPDATE exemplares
+        SET disponivel = 1
+        WHERE id_exemplar = NEW.id_exemplar;
+    END IF;
+END;
+
+DELIMITER ;
+
+SELECT
+    l.titulo,
+    COUNT(ex.id_exemplar) AS exemplares_disponiveis
+FROM exemplares ex
+JOIN livros l ON l.id_livro = ex.id_livro
+WHERE ex.disponivel = 1
+GROUP BY l.id_livro;
