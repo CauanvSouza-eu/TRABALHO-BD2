@@ -1,0 +1,73 @@
+INSERT INTO autores (id_autor, nome_autor) VALUES
+(1, 'Machado de Assis'),
+(2, 'Clarice Lispector'),
+(3, 'George Orwell'),
+(4, 'J. K. Rowling'),
+(5, 'Stephen King'),
+(6, 'Yuval Noah Harari');
+
+INSERT INTO categorias (id_categoria, nome_categoria) VALUES
+(1, 'Romance'),
+(2, 'Fantasia'),
+(3, 'Terror'),
+(4, 'Ciências Humanas'),
+(5, 'Ficção Científica');
+
+INSERT INTO editoras (id_editora, nome_editora, cidade) VALUES
+(1, 'Companhia das Letras', 'São Paulo'),
+(2, 'Rocco', 'Rio de Janeiro'),
+(3, 'Editora Globo', 'Porto Alegre'),
+(4, 'HarperCollins', 'São Paulo'),
+(5, 'Penguin Books', 'Londres');
+
+INSERT INTO livros (id_livro, id_editora, id_categoria, titulo, identificador, ano_publicado, edicao) VALUES
+(1, 1, 1, 'Dom Casmurro', 'ISBN123001', 1901, '1ª'),
+(2, 1, 1, 'A Hora da Estrela', 'ISBN123002', 1977, '1ª'),
+(3, 5, 5, '1984', 'ISBN123003', 1949, '1ª'),
+(4, 2, 2, 'Harry Potter e a Pedra Filosofal', 'ISBN123004', 1997, '1ª'),
+(5, 4, 3, 'O Iluminado', 'ISBN123005', 1977, '1ª'),
+(6, 3, 4, 'Sapiens: Uma Breve História da Humanidade', 'ISBN123006', 2011, '1ª');
+
+INSERT INTO livro_autores (id_livro, id_autor) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6);
+
+INSERT INTO exemplares (id_exemplar, id_livro, codigo_int, estado_conservacao, disponivel) VALUES
+(1, 1, 'DOMC-001', 'Bom', 1),
+(2, 1, 'DOMC-002', 'Regular', 1),
+
+(3, 2, 'HORA-001', 'Ótimo', 1),
+
+(4, 3, '1984-001', 'Bom', 1),
+(5, 3, '1984-002', 'Bom', 0),
+
+(6, 4, 'HP1-001', 'Ótimo', 0),
+(7, 4, 'HP1-002', 'Bom', 1),
+
+(8, 5, 'ILUM-001', 'Regular', 1),
+
+(9, 6, 'SAPI-001', 'Ótimo', 1),
+(10, 6, 'SAPI-002', 'Bom', 1);
+
+INSERT INTO usuarios (id_usuario, nome, email, telefone, tipo_usuario, matricula, siape) VALUES
+(1, 'Lucas Andrade', 'lucas.andrade@universidade.br', '47999910001', 'A', '202300123', ''),
+(2, 'Mariana Silva', 'mariana.silva@universidade.br', '47999920002', 'A', '202300321', ''),
+(3, 'Prof. Renato Gomes', 'renato.gomes@universidade.br', '47999930003', 'P', '', '1522334'),
+(4, 'Prof. Helena Castro', 'helena.castro@universidade.br', '47999940004', 'P', '', '1782211');
+
+INSERT INTO emprestimos (id_emprestimo, id_usuario, id_exemplar, data_retirada, data_prevista_devolucao, data_real_devolucao, status) VALUES
+(1, 1, 5, '2025-11-01', '2025-11-15', NULL, 'A'),
+(2, 2, 6, '2025-11-03', '2025-11-17', NULL, 'A'),
+(3, 3, 3, '2025-10-10', '2025-10-24', '2025-10-20', 'D');
+
+INSERT INTO reservas (id_reserva, id_usuario, id_livro, data_reserva, data_limite_retirada, status) VALUES
+(1, 2, 3, '2025-11-05', '2025-11-12', 'A'),
+(2, 1, 4, '2025-11-06', '2025-11-13', 'A');
+
+INSERT INTO sugestoes (id_sugestao, id_usuario, titulo_sugerido, autor_sugerido, editora_sugerida, justificativa, status, data_sugestao) VALUES
+(1, 3, 'Estruturas de Dados em Java', 'Nildemar da Silva', 'Pearson', 'Material útil para disciplina de Estruturas de Dados', 'A', '2025-11-02'),
+(2, 4, 'Banco de Dados: Conceitos e Práticas', 'Carlos Alberto Heuser', 'Bookman', 'Útil para curso de Banco de Dados I', 'A', '2025-11-03');
