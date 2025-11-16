@@ -1,0 +1,109 @@
+CREATE TABLE autores (
+    id_autor int NOT NULL,
+    nome_autor varchar(100) NOT NULL,
+    PRIMARY KEY (id_autor)
+);
+
+CREATE TABLE categorias (
+    id_categoria int NOT NULL,
+    nome_categoria varchar(50) NOT NULL,
+    PRIMARY KEY (id_categoria)
+);
+
+CREATE TABLE editoras (
+    id_editora int NOT NULL,
+    nome_editora varchar(100) NOT NULL,
+    cidade varchar(50) NOT NULL,
+    PRIMARY KEY (id_editora)
+);
+
+CREATE TABLE usuarios (
+    id_usuario int NOT NULL,
+    nome varchar(100) NOT NULL,
+    email varchar(100) NOT NULL,
+    telefone varchar(20) NOT NULL,
+    tipo_usuario char(1) NOT NULL,
+    matricula varchar(20) NOT NULL,
+    siape varchar(20) NOT NULL,
+    PRIMARY KEY (id_usuario)
+);
+
+CREATE TABLE livros (
+    id_livro int NOT NULL,
+    id_editora int NOT NULL,
+    id_categoria int NOT NULL,
+    titulo varchar(150) NOT NULL,
+    identificador varchar(20) NOT NULL,
+    ano_publicado year NOT NULL,
+    edicao varchar(20) NOT NULL,
+    PRIMARY KEY (id_livro)
+);
+
+CREATE TABLE exemplares (
+    id_exemplar int NOT NULL,
+    id_livro int NOT NULL,
+    codigo_int varchar(30) NOT NULL,
+    estado_conservacao varchar(50) NOT NULL,
+    disponivel tinyint NOT NULL,
+    PRIMARY KEY (id_exemplar)
+);
+
+CREATE TABLE emprestimos (
+    id_emprestimo int NOT NULL,
+    id_usuario int NOT NULL,
+    id_exemplar int NOT NULL,
+    data_retirada date NOT NULL,
+    data_prevista_devolucao date NOT NULL,
+    data_real_devolucao date NULL,
+    status char(1) NOT NULL,
+    PRIMARY KEY (id_emprestimo)
+);
+
+CREATE TABLE reservas (
+    id_reserva int NOT NULL,
+    id_usuario int NOT NULL,
+    id_livro int NOT NULL,
+    data_reserva date NOT NULL,
+    data_limite_retirada date NOT NULL,
+    status char(1) NOT NULL,
+    PRIMARY KEY (id_reserva)
+);
+
+CREATE TABLE sugestoes (
+    id_sugestao int NOT NULL,
+    id_usuario int NOT NULL,
+    titulo_sugerido varchar(150) NOT NULL,
+    autor_sugerido varchar(100) NOT NULL,
+    editora_sugerida varchar(100) NOT NULL,
+    justificativa varchar(250) NOT NULL,
+    status char(1) NOT NULL,
+    data_sugestao date NOT NULL,
+    PRIMARY KEY (id_sugestao)
+);
+
+CREATE TABLE livro_autores (
+    id_livro int NOT NULL,
+    id_autor int NOT NULL,
+    PRIMARY KEY (id_livro, id_autor)
+);
+
+ALTER TABLE emprestimos 
+    ADD FOREIGN KEY (id_exemplar) REFERENCES exemplares (id_exemplar);
+ALTER TABLE emprestimos 
+    ADD FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario);
+ALTER TABLE exemplares 
+    ADD FOREIGN KEY (id_livro) REFERENCES livros (id_livro);
+ALTER TABLE livro_autores 
+    ADD FOREIGN KEY (id_autor) REFERENCES autores (id_autor);
+ALTER TABLE livro_autores 
+    ADD FOREIGN KEY (id_livro) REFERENCES livros (id_livro);
+ALTER TABLE livros 
+    ADD FOREIGN KEY (id_categoria) REFERENCES categorias (id_categoria);
+ALTER TABLE livros 
+    ADD FOREIGN KEY (id_editora) REFERENCES editoras (id_editora);
+ALTER TABLE reservas 
+    ADD FOREIGN KEY (id_livro) REFERENCES livros (id_livro);
+ALTER TABLE reservas 
+    ADD FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario);
+ALTER TABLE sugestoes 
+    ADD FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario);
