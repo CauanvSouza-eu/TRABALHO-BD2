@@ -4,21 +4,41 @@ INSERT INTO autores (id_autor, nome_autor) VALUES
 (3, 'George Orwell'),
 (4, 'J. K. Rowling'),
 (5, 'Stephen King'),
-(6, 'Yuval Noah Harari');
+(6, 'Yuval Noah Harari'),
+(7, 'Agatha Christie'),
+(8, 'Isaac Asimov'),
+(9, 'J. R. R. Tolkien'),
+(10, 'Neil Gaiman'),
+(11, 'Margaret Atwood'),
+(12, 'H. P. Lovecraft'),
+(13, 'Arthur Conan Doyle'),
+(14, 'Franz Kafka'),
+(15, 'Gabriel García Márquez'),
+(16, 'Jane Austen');
 
 INSERT INTO categorias (id_categoria, nome_categoria) VALUES
 (1, 'Romance'),
 (2, 'Fantasia'),
 (3, 'Terror'),
 (4, 'Ciências Humanas'),
-(5, 'Ficção Científica');
+(5, 'Ficção Científica'),
+(6, 'Mistério'),
+(7, 'Biografia'),
+(8, 'Tecnologia'),
+(9, 'História'),
+(10, 'Psicologia');
 
 INSERT INTO editoras (id_editora, nome_editora, cidade) VALUES
 (1, 'Companhia das Letras', 'São Paulo'),
 (2, 'Rocco', 'Rio de Janeiro'),
 (3, 'Editora Globo', 'Porto Alegre'),
 (4, 'HarperCollins', 'São Paulo'),
-(5, 'Penguin Books', 'Londres');
+(5, 'Penguin Books', 'Londres'),
+(6, 'ALEPH', 'São Paulo'),
+(7, 'Intrínseca', 'Rio de Janeiro'),
+(8, 'DarkSide Books', 'São Paulo'),
+(9, 'Record', 'Rio de Janeiro'),
+(10, 'Suma', 'São Paulo');
 
 INSERT INTO livros (id_livro, id_editora, id_categoria, titulo, identificador, ano_publicado, edicao) VALUES
 (1, 1, 1, 'Dom Casmurro', 'ISBN123001', 1901, '1ª'),
@@ -26,7 +46,19 @@ INSERT INTO livros (id_livro, id_editora, id_categoria, titulo, identificador, a
 (3, 5, 5, '1984', 'ISBN123003', 1949, '1ª'),
 (4, 2, 2, 'Harry Potter e a Pedra Filosofal', 'ISBN123004', 1997, '1ª'),
 (5, 4, 3, 'O Iluminado', 'ISBN123005', 1977, '1ª'),
-(6, 3, 4, 'Sapiens: Uma Breve História da Humanidade', 'ISBN123006', 2011, '1ª');
+(6, 3, 4, 'Sapiens: Uma Breve História da Humanidade', 'ISBN123006', 2011, '1ª'),
+(7, 6, 5, 'Fundação', 'ISBN200001', 1951, '1ª'),
+(8, 6, 5, 'Eu, Robô', 'ISBN200002', 1950, '1ª'),
+(9, 7, 6, 'Assassinato no Expresso Oriente', 'ISBN200003', 1934, '1ª'),
+(10, 9, 9, 'Cem Anos de Solidão', 'ISBN200004', 1967, '1ª'),
+(11, 10, 10, 'O Iluminado da Mente', 'ISBN200005', 2018, '1ª'),
+(12, 8, 3, 'O Chamado de Cthulhu', 'ISBN200006', 1928, '1ª'),
+(13, 9, 1, 'Orgulho e Preconceito', 'ISBN200007', 1903, '1ª'),
+(14, 7, 2, 'O Senhor dos Anéis: A Sociedade do Anel', 'ISBN200008', 1954, '1ª'),
+(15, 7, 2, 'O Hobbit', 'ISBN200009', 1937, '1ª'),
+(16, 8, 3, 'O Médico e o Monstro', 'ISBN200010', 1904, '1ª'),
+(17, 9, 1, 'Metamorfose', 'ISBN200011', 1915, '1ª'),
+(18, 7, 6, 'Sherlock Holmes: Um Estudo em Vermelho', 'ISBN200012', 1901, '1ª');
 
 INSERT INTO livro_autores (id_livro, id_autor) VALUES
 (1, 1),
@@ -34,40 +66,89 @@ INSERT INTO livro_autores (id_livro, id_autor) VALUES
 (3, 3),
 (4, 4),
 (5, 5),
-(6, 6);
+(6, 6),
+(7, 8),
+(8, 8),
+(9, 7),
+(10, 15),
+(11, 5),
+(12, 12),
+(13, 16),
+(14, 9),
+(15, 9),
+(16, 5),
+(17, 14),
+(18, 13);
 
 INSERT INTO exemplares (id_exemplar, id_livro, codigo_int, estado_conservacao, disponivel) VALUES
 (1, 1, 'DOMC-001', 'Bom', 1),
 (2, 1, 'DOMC-002', 'Regular', 1),
-
 (3, 2, 'HORA-001', 'Ótimo', 1),
-
 (4, 3, '1984-001', 'Bom', 1),
 (5, 3, '1984-002', 'Bom', 0),
-
 (6, 4, 'HP1-001', 'Ótimo', 0),
 (7, 4, 'HP1-002', 'Bom', 1),
-
 (8, 5, 'ILUM-001', 'Regular', 1),
-
 (9, 6, 'SAPI-001', 'Ótimo', 1),
-(10, 6, 'SAPI-002', 'Bom', 1);
+(10, 6, 'SAPI-002', 'Bom', 1),
+(11, 7, 'FUNDA-001', 'Bom', 1),
+(12, 7, 'FUNDA-002', 'Ótimo', 1),
+(13, 8, 'EURO-001', 'Bom', 1),
+(14, 8, 'EURO-002', 'Regular', 1),
+(15, 9, 'MIST-001', 'Ótimo', 1),
+(16, 9, 'MIST-002', 'Bom', 1),
+(17, 10, 'SOLI-001', 'Regular', 1),
+(18, 11, 'ILUMM-001', 'Ótimo', 1),
+(19, 12, 'CTHU-001', 'Regular', 1),
+(20, 12, 'CTHU-002', 'Ótimo', 1),
+(21, 13, 'ORGUL-001', 'Bom', 1),
+(22, 14, 'SDA-001', 'Bom', 1),
+(23, 14, 'SDA-002', 'Bom', 1),
+(24, 15, 'HOB-001', 'Ótimo', 1),
+(25, 15, 'HOB-002', 'Bom', 1),
+(26, 16, 'MEDM-001', 'Regular', 1),
+(27, 17, 'META-001', 'Ótimo', 1),
+(28, 18, 'SHLK-001', 'Bom', 1),
+(29, 18, 'SHLK-002', 'Bom', 1),
+(30, 18, 'SHLK-003', 'Ótimo', 1);
 
 INSERT INTO usuarios (id_usuario, nome, email, telefone, tipo_usuario, matricula, siape) VALUES
 (1, 'Lucas Andrade', 'lucas.andrade@universidade.br', '47999910001', 'A', '202300123', ''),
 (2, 'Mariana Silva', 'mariana.silva@universidade.br', '47999920002', 'A', '202300321', ''),
 (3, 'Prof. Renato Gomes', 'renato.gomes@universidade.br', '47999930003', 'P', '', '1522334'),
-(4, 'Prof. Helena Castro', 'helena.castro@universidade.br', '47999940004', 'P', '', '1782211');
+(4, 'Prof. Helena Castro', 'helena.castro@universidade.br', '47999940004', 'P', '', '1782211'),
+(5, 'Ana Beatriz Ramos', 'ana.ramos@universidade.br', '47999950005', 'A', '202300555', ''),
+(6, 'Carlos Eduardo Lima', 'carlos.lima@universidade.br', '47999960006', 'A', '202300777', ''),
+(7, 'Paulo Henrique Souza', 'paulo.souza@universidade.br', '47999970007', 'A', '202300888', ''),
+(8, 'João Victor Mendes', 'joao.mendes@universidade.br', '47999980008', 'A', '202300999', ''),
+(9, 'Prof. Carla Moura', 'carla.moura@universidade.br', '47999990009', 'P', '', '1933112'),
+(10, 'Prof. Roberto Vasconcelos', 'roberto.vasconcelos@universidade.br', '47999880010', 'P', '', '1552216'),
+(11, 'Prof. Adriano Pires', 'adriano.pires@universidade.br', '47999880011', 'P', '', '1772216'),
+(12, 'Letícia Fernandes', 'leticia.fernandes@universidade.br', '47999880012', 'A', '202301111', '');
 
 INSERT INTO emprestimos (id_emprestimo, id_usuario, id_exemplar, data_retirada, data_prevista_devolucao, data_real_devolucao, status) VALUES
 (1, 1, 5, '2025-11-01', '2025-11-15', NULL, 'A'),
 (2, 2, 6, '2025-11-03', '2025-11-17', NULL, 'A'),
-(3, 3, 3, '2025-10-10', '2025-10-24', '2025-10-20', 'D');
+(3, 3, 3, '2025-10-10', '2025-10-24', '2025-10-20', 'D'),
+(4, 5, 11, '2025-11-10', '2025-11-24', NULL, 'A'),
+(5, 6, 12, '2025-11-08', '2025-11-22', NULL, 'A'),
+(6, 7, 14, '2025-10-15', '2025-10-29', '2025-10-27', 'D'),
+(7, 8, 22, '2025-11-01', '2025-11-15', NULL, 'A'),
+(8, 9, 20, '2025-11-02', '2025-11-20', NULL, 'A'),
+(9, 10, 23, '2025-10-28', '2025-11-11', '2025-11-10', 'D'),
+(10, 11, 25, '2025-11-05', '2025-11-19', NULL, 'A');
 
 INSERT INTO reservas (id_reserva, id_usuario, id_livro, data_reserva, data_limite_retirada, status) VALUES
 (1, 2, 3, '2025-11-05', '2025-11-12', 'A'),
-(2, 1, 4, '2025-11-06', '2025-11-13', 'A');
+(2, 1, 4, '2025-11-06', '2025-11-13', 'A'),
+(3, 5, 7, '2025-11-07', '2025-11-14', 'A'),
+(4, 6, 7, '2025-11-08', '2025-11-15', 'A'),
+(5, 7, 15, '2025-11-06', '2025-11-13', 'A'),
+(6, 9, 3, '2025-11-09', '2025-11-16', 'A');
 
 INSERT INTO sugestoes (id_sugestao, id_usuario, titulo_sugerido, autor_sugerido, editora_sugerida, justificativa, status, data_sugestao) VALUES
 (1, 3, 'Estruturas de Dados em Java', 'Nildemar da Silva', 'Pearson', 'Material útil para disciplina de Estruturas de Dados', 'A', '2025-11-02'),
-(2, 4, 'Banco de Dados: Conceitos e Práticas', 'Carlos Alberto Heuser', 'Bookman', 'Útil para curso de Banco de Dados I', 'A', '2025-11-03');
+(2, 4, 'Banco de Dados: Conceitos e Práticas', 'Carlos Alberto Heuser', 'Bookman', 'Útil para curso de Banco de Dados I', 'A', '2025-11-03'),
+(3, 9, 'A Arte de Pensar Claramente', 'Rolf Dobelli', 'Objetiva', 'Material útil para discussões em Psicologia Cognitiva', 'A', '2025-11-05'),
+(4, 10, 'Clean Code', 'Robert C. Martin', 'Pearson', 'Relevante para o curso de Programação Avançada', 'A', '2025-11-07'),
+(5, 11, 'Machine Learning', 'Tom Mitchell', 'McGraw-Hill', 'Importante para disciplina de IA', 'A', '2025-11-06');
